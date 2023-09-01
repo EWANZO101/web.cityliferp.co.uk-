@@ -1,0 +1,47 @@
+    
+    
+    <title>World Time Zones</title>
+</head>
+<body>
+    <h1>World Time Zones</h1>
+    <div id="timeZones"></div>
+
+    <script>
+        // Function to display current time in specified time zones
+        function displayTime(timeZone, label) {
+            const now = new Date();
+            const options = {
+                timeZone: timeZone,
+                hour12: false,
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            };
+            const formattedTime = now.toLocaleTimeString('en-US', options);
+            document.getElementById('timeZones').innerHTML += `<p>${label}: ${formattedTime}</p>`;
+        }
+
+        // Add time zones and labels here
+        const timeZones = [
+            { timeZone: 'Europe/London', label: 'UK Time' },
+            { timeZone: 'America/New_York', label: 'Eastern Time' },
+            { timeZone: 'America/Los_Angeles', label: 'Pacific Time' },
+            { timeZone: '', label: 'Pacific Time' },   
+            // Add more time zones as needed
+        ];
+
+        // Display current time for each time zone
+        timeZones.forEach(zone => {
+            displayTime(zone.timeZone, zone.label);
+        });
+
+        // Refresh the times every second
+        setInterval(() => {
+            document.getElementById('timeZones').innerHTML = '';
+            timeZones.forEach(zone => {
+                displayTime(zone.timeZone, zone.label);
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
